@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector("button");
   const tokenBox = document.getElementById("token-box");
+  const token = tokenBox.dataset.token; // ambil token dari backend
 
-  // Token sudah diinject backend ke file HTML
-  const token = tokenBox.dataset.token; // backend isi attribute data-token
-
-  // Ganti hint jadi token setelah backend selesai
+  // Ganti hint jadi token valid setelah backend inject
   if (token && token.length > 0) {
     setTimeout(() => {
       tokenBox.innerText = token;
