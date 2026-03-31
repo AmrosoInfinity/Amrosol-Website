@@ -1,7 +1,8 @@
-// Ambil parameter dari URL: https://amrosol.online/<userId>/<hashToken>
+// Ambil parameter dari URL: https://amrosol.online/<service>/<userId>/<hashToken>
 const pathParts = window.location.pathname.split("/").filter(Boolean);
-const userId = pathParts[0];       // user_id dari URL
-const hashToken = pathParts[1];    // hash_token dari URL
+const service = pathParts[0];      // grab / gojek
+const userId = pathParts[1];       // user_id dari URL
+const hashToken = pathParts[2];    // hash_token dari URL
 
 async function loadToken() {
   try {
@@ -13,8 +14,8 @@ async function loadToken() {
 
     const data = await res.json();
 
-    // Validasi userId + hashToken
-    if (data.userId === userId && data.hashToken === hashToken) {
+    // Validasi service + userId + hashToken
+    if (data.service === service && data.userId === userId && data.hashToken === hashToken) {
       document.getElementById("title").textContent = `Token ${data.service.toUpperCase()} untuk User ${data.userId}`;
       document.getElementById("token").textContent = data.token;
       document.getElementById("note").textContent = `Token ini akan kadaluarsa dalam ${data.ttl}.`;
