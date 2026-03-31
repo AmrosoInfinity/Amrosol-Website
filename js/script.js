@@ -1,12 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector("button");
-  const tokenEl = document.getElementById("token");
-  const token = tokenEl.innerText;
+  const tokenBox = document.getElementById("token-box");
+  const token = "1234567890abcdef"; // backend inject di file HTML
 
-  // Token muncul dengan delay
+  // Delay tampil token
   setTimeout(() => {
-    tokenEl.style.display = "inline-block";
-    tokenEl.style.animation = "fadeIn 1s ease-in";
+    tokenBox.innerText = token;
+    tokenBox.classList.remove("hint");
+    tokenBox.style.background = "#fff";
+    tokenBox.style.color = "#333";
+    tokenBox.style.padding = "12px";
+    tokenBox.style.borderRadius = "8px";
+    tokenBox.style.animation = "fadeIn 1s ease-in";
   }, 2000);
 
   // Copy ke clipboard
