@@ -1,37 +1,19 @@
-// Ambil parameter dari URL: https://amrosol.online/<service>/<userId>/<hashToken>
-const pathParts = window.location.pathname.split("/").filter(Boolean);
-const service = pathParts[0];      // grab / gojek
-const userId = pathParts[1];       // user_id dari URL
-const hashToken = pathParts[2];    // hash_token dari URL
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector("button");
+  const tokenEl = document.getElementById("token");
+  const token = tokenEl.innerText;
 
-async function loadToken() {
-  try {
-    const res = await fetch("data/token.json");
-    if (!res.ok) {
-      document.getElementById("token").textContent = "Token tidak ditemukan atau kadaluarsa";
-      return;
-    }
+  // Token muncul setelah 2 detik dengan animasi
+  setTimeout(() => {
+    tokenEl.style.display = "inline-block";
+    tokenEl.style.animation = "fadeIn 1s ease-in";
+  }, 2000);
 
-    const data = await res.json();
-
-    // Validasi service + userId + hashToken
-    if (data.service === service && data.userId === userId && data.hashToken === hashToken) {
-      document.getElementById("title").textContent = `Token ${data.service.toUpperCase()} untuk User ${data.userId}`;
-      document.getElementById("token").textContent = data.token;
-      document.getElementById("note").textContent = `Token ini akan kadaluarsa dalam ${data.ttl}.`;
-    } else {
-      document.getElementById("token").textContent = "Token tidak ditemukan atau kadaluarsa";
-    }
-  } catch (err) {
-    document.getElementById("token").textContent = "Error mengambil token";
-  }
-}
-
-document.getElementById("copyBtn").addEventListener("click", () => {
-  const tokenText = document.getElementById("token").textContent;
-  navigator.clipboard.writeText(tokenText)
-    .then(() => alert("Token berhasil dicopy!"))
-    .catch(err => alert("Gagal copy token: " + err));
+  // Copy ke clipboard
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(token).then(() => {
+      btn.innerText = "✅ Disalin!";
+      setTimeout(() => btn.innerText = "Salin", 1500);
+    });
+  });
 });
-
-loadToken();
