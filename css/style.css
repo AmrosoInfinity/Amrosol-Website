@@ -29,6 +29,13 @@ body {
   animation: fadeIn 1.2s ease-in;
 }
 
+.hint {
+  font-size: 18px;
+  color: #ddd;
+  font-style: italic;
+  margin: 15px 0;
+}
+
 .logo {
   width: 100px;
   margin: 0 auto;
