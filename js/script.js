@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tokenEl = document.getElementById("token");
   const token = tokenEl.innerText;
 
-  // Token muncul setelah 2 detik dengan animasi
+  // Token muncul dengan delay
   setTimeout(() => {
     tokenEl.style.display = "inline-block";
     tokenEl.style.animation = "fadeIn 1s ease-in";
